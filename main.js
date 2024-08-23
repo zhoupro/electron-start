@@ -1,6 +1,8 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow,ipcMain } = require('electron')
 const path = require('node:path')
+const {spawn} = require("child_process")
+
 
 function createWindow () {
   // Create the browser window.
@@ -16,19 +18,29 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
+
+
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  ipcMain.handle('ping',  (_, p1)=>{
+    console.log("params",p1)
+
+
+    spawn("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+    return "hello"
+  })
   createWindow()
+  if (BrowserWindow.getAllWindows().length === 0) createWindow()
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+   
   })
 })
 

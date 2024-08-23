@@ -5,3 +5,11 @@
  * `contextIsolation` is turned on. Use the contextBridge API in `preload.js`
  * to expose Node.js functionality from the main process.
  */
+
+ 
+document.getElementById("ob").onclick = async () => {
+    let {ping} = window.versions
+    let res = await ping("abcde")
+    console.log(res)
+    console.log("hereabc")
+}

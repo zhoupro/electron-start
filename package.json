@@ -14,9 +14,16 @@
     "tutorial",
     "demo"
   ],
+  "browser": {
+    "child_process": false
+  },
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^32.0.1"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "chrome-launcher": "^1.1.2"
   }
 }

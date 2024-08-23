@@ -6,6 +6,15 @@
  *
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
+
+const { contextBridge, ipcRenderer } = require('electron')
+
+contextBridge.exposeInMainWorld('versions', {
+  ping: (p1) => ipcRenderer.invoke('ping',p1)
+  // we can also expose variables, not just functions
+})
+
+
 window.addEventListener('DOMContentLoaded', () => {
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)
@@ -15,4 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const type of ['chrome', 'node', 'electron']) {
     replaceText(`${type}-version`, process.versions[type])
   }
+  //exec('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',  function (err, stdout, stderr) {}) 
+
+
 })
